@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}blog{% endblock title %}
+
+
+{% block blogactive %}active{% endblock blogactive %}
+{% block body %} 
+<div class="container my-3">
+    <!--first blog start-->
+  <h1>blog articles by iblogger</h1>
+  {% for post in allposts %}
+    <div class="row mb-2">
+    <div class="col-md-13">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-dark">Article by {{post.author}} </strong>
+          <strong class="d-inline-block mb-2 text-primary">views({{post.views}}) </strong>
+          <h2 class="blog-post-title"><a class="text-dark" href="/blog/{{post.slug}}">{{post.title}}</a></h2>
+          <div class="mb-1 text-muted">{{post.timestamp}}</div>
+          <p class="card-text mb-auto">{{post.content | truncatechars:500 }}</p>
+          <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
+        </div>
+        {% if post.image %}
+      <!--
+
+
+          <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+  
+        </div>
+        -->
+        <div class="card" style="width: 18rem;">
+        <img src="{{post.image.url}}" class="card-img-top" alt="image"/>
+      </div>
+      {% endif %}
+      </div>
+     
+    </div>
+    <!--first blog end-->
+
+    <!--second blog start-->
+   
+    <!--second blog ends-->
+  </div>
+
+
+
+{% endfor %}
+</div>
+
+{% endblock body %}

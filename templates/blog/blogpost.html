@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %} Blogpost{% endblock title %}
+{% block body %}
+<!--sharebutton script-->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0"
+    nonce="5dC1cQek"></script>
+
+
+<!--sharebutton script-->
+{% load humanize %}
+<div class="container my-3">
+    <h2 class="blog-post-title"><a class="text-dark" href="/blog/{{post.slug}}">{{post.title}}</a></h2>
+    <p class="blog-post-meta">{{post.timestamp}} by <a href="/about">{{post.author}}</a></p>
+    <p>{{post.content|safe}}</p>
+    (<span> {{post.views}} views</span>)</p>
+    <hr>
+    <!--share button fb-->
+    <div class="fb-share-button m-3" data-href="http://127.0.0.1:8000/blog/first-blog" data-layout="button_count"
+        data-size="large"><a target="_blank"
+            href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fblog%2Ffirst-blog&amp;src=sdkpreparse"
+            class="fb-xfbml-parse-ignore">Share</a></div>
+            
+        <div class="m-3">
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+         
+   
+</div>
+
+ <!--share button fb ends-->
+ 
+<!--<div class="container">
+    <h2> Comments ({{comments.count}})</h2>
+    <div class="my-2">
+        {% if user.is_authenticated %}
+        <form action="/blog/postComment" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">Post Comment </label>
+                <input type="text" class="form-control" name="comment" placeholder="Enter comment here">
+            </div>
+            <input type="hidden" name="postSno" value="{{post.sno}}">
+             <input type="hidden" name="parentSno" value="">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% else %}
+        <span class="badge bg-secondary ">Please login to post a comment</span>
+        {% endif %}
+
+
+    </div>
+    {% for comment in comments %}
+    <div class="row my-3">
+        <div class="col-md-1  ">
+            <img class="rounded mx-auto d-block w-100 border border-dark p-2" src="/static/img/user.png" alt="user">
+        </div>
+        <div class="col-md-11 ">
+            <b> {{comment.user.username}} </b> <span class="badge bg-secondary ">{{comment.timestamp| naturaltime}}
+               </span>
+
+            <div> {{comment.comment}} </div>
+                 <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
+                    Reply
+                </button>
+                <div class="collapse" id="replyBox{{comment.sno}}">
+                    <div class="card card-body my-2">
+                        <form action="/blog/postComment" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="comment">Post a reply </label>
+                                <input type="text" class="form-control" name="comment" placeholder="Enter comment here">
+                                <input type="hidden" name="parentSno" value="{{comment.sno}}">
+                            </div>
+                            <input type="hidden" name="postSno" value="{{post.sno}}">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>!-->
+
+{% endblock %}

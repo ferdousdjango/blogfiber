@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}home{% endblock title %}
+
+
+{% block blogactive %}active{% endblock blogactive %}
+{% block body %} 
+<div class="container my-3 ml-2">
+    <!--first blog start-->
+  
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Blog articles</h1>
+        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+        <p>
+          
+          <a href="/blog" class="btn btn-secondary my-2">Read Blogs</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  {% for post in allposts %}
+  
+  
+  
+  
+  
+  
+  
+
+ 
+  
+  
+ 
+    <div class="row mb-2">
+    <div class="col-md-13">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Article by {{post.author}}</strong>
+          <h3 class="mb-0">{{post.title}}</h3>
+          <div class="mb-1 text-muted">{{post.timestamp}}</div>
+          <p class="card-text mb-auto">{{post.content | truncatechars:500 }}</p>
+          <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
+        </div>
+        {% if post.image %}
+     
+        <div class="card" style="width: 18rem;">
+        <img src="{{post.image.url}}" class="card-img-top" alt="image"/>
+      </div>
+      {% endif %}
+      </div>
+     
+    </div>
+    <!--first blog end-->
+
+    <!--second blog start-->
+   
+    <!--second blog ends-->
+  </div>
+
+
+
+{% endfor %}
+</div>
+
+{% endblock body %}
